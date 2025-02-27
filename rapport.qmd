@@ -1,54 +1,28 @@
 ---
 title: "rapport"
-format: html
 author : Juliette Grison
+format: html
+params:
+  code_commune: "Bordeaux"
+  code_departement: "Gironde"
 ---
 
-# Set up
-```{r}
-detach("package:firstlibjuliette", unload = TRUE)
+```{r Set up}
 remotes::install_github("juliette-grison/firstlib_juliette")
 library(firstlibjuliette)
 df <- firstlibjuliette::df
 ```
 
-# Commune : Bordeaux
-```{r}
-df_bordeaux <- df[df[["Libellé.de.la.commune"]] == "Bordeaux", ]
-df_bordeaux <- creer_commune(df_bordeaux)
-summary(df_bordeaux)
-plot(df_bordeaux)
+```{r Commune}
+df_commune <- df[df[["Libellé.de.la.commune"]] == params$code_commune, ]
+df_commune <- creer_commune(df_commune)
+summary(df_commune)
+plot(df_commune)
 ```
 
-# Département : Gironde
-```{r}
-df_gironde <- df[df[["Libellé.du.département"]] == "Gironde", ]
-df_gironde <- creer_departement(df_gironde)
-summary(df_gironde)
-plot(df_gironde)
+```{r Département}
+df_departement <- df[df[["Libellé.du.département"]] == params$code_departement, ]
+df_departement <- creer_departement(df_departement)
+summary(df_departement)
+plot(df_departement)
 ```
-
-# Commune : Ambronay
-```{r}
-df_ambronay <- df[df[["Libellé.de.la.commune"]] == "Ambronay", ]
-df_ambronay <- creer_commune(df_ambronay)
-summary(df_ambronay)
-plot(df_ambronay)
-```
-
-# Département : Ain
-```{r}
-df_ain <- df[df[["Libellé.du.département"]] == "Ain", ]
-df_ain <- creer_departement(df_ain)
-summary(df_ain)
-plot(df_ain)
-```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
